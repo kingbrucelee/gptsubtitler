@@ -2,6 +2,14 @@
 Automatically subtitle any English-speaking video to a language of your choice.
 **Please don't forget to star the repository if you find it useful or educational!**
 
+Before:
+
+https://github.com/extremq/subtitler/assets/45830561/49f6ecce-cfdc-4f1c-97eb-07a36ac841c9
+
+After (in Romanian):
+
+https://github.com/extremq/subtitler/assets/45830561/9d122965-6fc0-4cff-9dcf-a6d6c3c2f1e0
+
 # Setup
 Install the `requirements.txt` file.
 
