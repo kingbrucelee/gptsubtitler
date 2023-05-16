@@ -29,7 +29,7 @@ class Transcriber(object):
         Transcriber.create_model()
 
         if output_video_file is None:
-            output_video_file = video_file + "_subtitled.mp4"
+            output_video_file = video_file.replace(".mp4", "_subtitled.mp4")
 
         # Try to transcribe audio
         transcript = None
