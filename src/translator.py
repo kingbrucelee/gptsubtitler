@@ -4,6 +4,7 @@ class Translator(object):
     model = None
     tokenizer = None
     model_type = None
+    AVAILABLE_MODELS = ["base", "large"]
 
     @staticmethod
     def create_model_and_tokenizer():
@@ -29,6 +30,10 @@ class Translator(object):
 
     @staticmethod
     def translate(text, source_language="en", target_language="ro", model_type="base"):
+        if model_type not in Translator.AVAILABLE_MODELS:
+            print(f"Invalid 'model_type'. Using base model. Available models: {Translator.AVAILABLE_MODELS}")
+            model_type = "base"
+
         # Set model type
         Translator.model_type = model_type
 

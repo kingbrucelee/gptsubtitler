@@ -8,6 +8,7 @@ class Transcriber(object):
     model_type = None
     target_language = None
     language_model_type = None
+    AVAILABLE_MODELS = ["tiny", "base", "medium", "large"]
 
     @staticmethod
     def create_model():
@@ -20,6 +21,10 @@ class Transcriber(object):
 
     @staticmethod
     def transcribe(video_file, output_video_file=None, output_file="output.srt", target_language=None, model_type="base", language_model_type="base"):
+        if model_type not in Transcriber.AVAILABLE_MODELS:
+            print(f"Invalid 'model_type'. Using base model. Available models: {Transcriber.AVAILABLE_MODELS}")
+            model_type = "base"
+
         # Set target language
         Transcriber.target_language = target_language
 
