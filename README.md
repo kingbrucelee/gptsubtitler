@@ -1,5 +1,6 @@
 # Subtitler
 Automatically subtitle any English-speaking video to a language of your choice.
+**Please don't forget to star the repository if you find it useful or educational!**
 
 # Setup
 Install the `requirements.txt` file.

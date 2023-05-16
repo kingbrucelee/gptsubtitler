@@ -84,9 +84,9 @@ class Transcriber(object):
                 # Translate text only if user wanted to translate text and target language is not English (because the text is already in English)
                 text = Translator.translate(text, target_language=Transcriber.target_language).strip()
 
-                print(f"- Line {line['id']} of {len(transcript['segments'])}: {line['text']}\n --> {text}")
+                print(f"- Line {line['id'] + 1} of {len(transcript['segments'])}: {line['text']}\n --> {text}")
             else:
-                print(f"- Line {line['id']} of {len(transcript['segments'])}: {line['text']}")
+                print(f"- Line {line['id'] + 1} of {len(transcript['segments'])}: {line['text']}")
             srt_content += text + "\n"
 
             srt_content += "\n"
