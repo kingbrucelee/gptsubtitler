@@ -3,25 +3,35 @@ from transformers import M2M100ForConditionalGeneration, M2M100Tokenizer
 class Translator(object):
     model = None
     tokenizer = None
+    model_type = None
 
     @staticmethod
     def create_model_and_tokenizer():
         if Translator.model is None:
             try:
-                Translator.model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_418M")
+                if Translator.model_type == "base":
+                    Translator.model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_418M")
+                elif Translator.model_type == "large":
+                    Translator.model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_1.2B")
             except Exception as e:
                 print("Couldn't load model.")
                 print(e)
         
         if Translator.tokenizer is None:
             try:
-                Translator.tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_418M")
+                if Translator.model_type == "base":
+                    Translator.tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_418M")
+                elif Translator.model_type == "large":
+                    Translator.tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_1.2B")
             except Exception as e:
                 print("Couldn't load tokenizer.")
                 print(e)
 
     @staticmethod
-    def translate(text, source_language="en", target_language="ro"):
+    def translate(text, source_language="en", target_language="ro", model_type="base"):
+        # Set model type
+        Translator.model_type = model_type
+
         Translator.create_model_and_tokenizer()
 
         # Set source language for tokenizer

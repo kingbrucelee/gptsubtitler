@@ -7,6 +7,7 @@ class Transcriber(object):
     model = None
     model_type = None
     target_language = None
+    language_model_type = None
 
     @staticmethod
     def create_model():
@@ -18,9 +19,12 @@ class Transcriber(object):
                 print(e)
 
     @staticmethod
-    def transcribe(video_file, output_video_file=None, output_file="output.srt", target_language=None, model_type="base"):
+    def transcribe(video_file, output_video_file=None, output_file="output.srt", target_language=None, model_type="base", language_model_type="base"):
         # Set target language
         Transcriber.target_language = target_language
+
+        # Set language model type
+        Transcriber.language_model_type = language_model_type
 
         # Set model type
         Transcriber.model_type = model_type
@@ -82,7 +86,7 @@ class Transcriber(object):
             text = line["text"].strip()
             if Transcriber.target_language is not None and Transcriber.target_language != "en":
                 # Translate text only if user wanted to translate text and target language is not English (because the text is already in English)
-                text = Translator.translate(text, target_language=Transcriber.target_language).strip()
+                text = Translator.translate(text, target_language=Transcriber.target_language, model_type=Transcriber.language_model_type).strip()
 
                 print(f"- Line {line['id'] + 1} of {len(transcript['segments'])}: {line['text']}\n --> {text}")
             else:

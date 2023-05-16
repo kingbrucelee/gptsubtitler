@@ -23,7 +23,7 @@ Example usage for adding subtitles and translating them in Romanian:
 ```py
 from src.transcriber import Transcriber
 
-Transcriber.transcribe("video.mp4", target_language="ro", model_type="base")
+Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="large")
 ```
 
 You can also use the `Translator` class from `translator.py` if you just want to translate some text.
@@ -40,3 +40,15 @@ If you have generated a `.srt` file and just want to add subtitles:
 from src.video_utils import create_video_with_subtitles
 create_video_with_subtitles("video.mp4", "output.srt", "video_subtitled.mp4")
 ```
+
+# Options
+Available options for `model_type` (the audio to text model):
+- tiny
+- base
+- small
+- medium
+- large
+
+Available options for `language_model_type` (the language translator model):
+- base
+- large
