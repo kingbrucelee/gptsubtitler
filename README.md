@@ -11,7 +11,7 @@ Before:
 
 https://github.com/extremq/subtitler/assets/45830561/49f6ecce-cfdc-4f1c-97eb-07a36ac841c9
 
-After (in Romanian - model_type=medium, language_model_type=base):
+After (in Romanian - `model_type=medium, language_model_type=base`):
 
 https://github.com/extremq/subtitler/assets/45830561/20bc5169-0ce3-47cd-adb7-15d75daf27f4
 
