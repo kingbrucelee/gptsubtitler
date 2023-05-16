@@ -2,8 +2,11 @@
 Automatically subtitle any English-speaking video to a language of your choice.
 
 Models used:
-- OpenAI whisper - for text-to-audio
-- Facebook M2M10 - for translation
+- [OpenAI whisper](https://openai.com/research/whisper) - for text-to-audio
+- [Facebook M2M10](https://huggingface.co/facebook/m2m100_418M) - for translation
+
+Tools used:
+- `ffmpeg`
 
 **Please don't forget to star the repository if you find it useful or educational!**
 
