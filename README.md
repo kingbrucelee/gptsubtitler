@@ -25,6 +25,18 @@ Install the `requirements.txt` file.
 pip install -r requirements.txt
 ```
 
+Install [`ffmpeg`](https://ffmpeg.org/):
+```bash
+# Ubuntu or Debian
+sudo apt update && sudo apt install ffmpeg
+
+# MacOS
+brew install ffmpeg
+
+# Windows using Chocolatey https://chocolatey.org/
+choco install ffmpeg
+```
+
 # Quick guide
 Example usage for adding subtitles and translating them in Romanian:
 ```py
