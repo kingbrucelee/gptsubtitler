@@ -19,10 +19,10 @@ After (in Romanian - `model_type=medium, language_model_type=base`):
 https://github.com/extremq/subtitler/assets/45830561/20bc5169-0ce3-47cd-adb7-15d75daf27f4
 
 # Setup
-Install the `requirements.txt` file.
+Install using `pip`.
 
 ```
-pip install -r requirements.txt
+pip install gptsubtitler
 ```
 
 Install [`ffmpeg`](https://ffmpeg.org/):
@@ -42,7 +42,7 @@ Example usage for adding subtitles and translating them in Romanian:
 
 You only need to specify the language you want the subtitles to be in, the program will handle the rest of the work.
 ```py
-from src.transcriber import Transcriber
+from gptsubtitler import Transcriber
 
 # I strongly recommend using the "medium" model_type.
 Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="base", device="cuda")
@@ -52,14 +52,14 @@ You can also use the `Translator` class from `translator.py` if you just want to
 
 Example usage for translating from English to Romanian:
 ```py
-from src.translator import Translator
+from gptsubtitler import Translator
 
 print(Translator.translate("Hi!", target_language="ro", source_language="en", device="cuda"))
 ```
 
 If you have generated a `.srt` file and just want to add subtitles:
 ```py
-from src.video_utils import create_video_with_subtitles
+from gptsubtitler import create_video_with_subtitles
 create_video_with_subtitles("video.mp4", "output.srt", "video_subtitled.mp4")
 ```
 

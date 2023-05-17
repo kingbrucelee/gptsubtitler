@@ -3,3 +3,6 @@ __pycache__/
 *.mp4
 *.srt
 test.py
+dist/
+gptsubtitler.egg-info
+build

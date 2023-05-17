@@ -1,6 +1,6 @@
 import whisper
-from src.video_utils import convert_video_to_audio, create_video_with_subtitles
-from src.translator import Translator
+from .video_utils import convert_video_to_audio, create_video_with_subtitles
+from .translator import Translator
 import os
 
 
