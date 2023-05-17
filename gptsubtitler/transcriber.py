@@ -98,11 +98,11 @@ class Transcriber(object):
 
         print(srt_content)
         # Add .srt extension if not present
-        if not output_file.endswith(".srt"):
-            output_file += ".srt"
+        if not output_subtitle_file.endswith(".srt"):
+            output_subtitle_file += ".srt"
 
         # Write SRT file
-        with open(output_file, "w", encoding="utf-8") as f:
+        with open(output_subtitle_file, "w", encoding="utf-8") as f:
             f.write(srt_content)
 
         create_video_with_subtitles(video_file, output_subtitle_file, output_video_file)
