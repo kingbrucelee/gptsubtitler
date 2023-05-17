@@ -45,7 +45,10 @@ You only need to specify the language you want the subtitles to be in, the progr
 from gptsubtitler import Transcriber
 
 # I strongly recommend using the "medium" model_type.
-Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="base", device="cuda")
+Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="base")
+
+# If you want to use the gpu, add device="cuda"
+# Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="base", device="cuda") 
 ```
 
 You can also use the `Translator` class from `translator.py` if you just want to translate some text.
@@ -54,7 +57,7 @@ Example usage for translating from English to Romanian:
 ```py
 from gptsubtitler import Translator
 
-print(Translator.translate("Hi!", target_language="ro", source_language="en", device="cuda"))
+print(Translator.translate("Hi!", target_language="ro", source_language="en"))
 ```
 
 If you have generated a `.srt` file and just want to add subtitles:
