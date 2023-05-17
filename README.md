@@ -1,8 +1,8 @@
 # Subtitler
-Automatically subtitle any video spoken in any language to a language of your choice.
+Automatically subtitle any video spoken in any language to a language of your choice using AI.
 
 Models used:
-- [OpenAI whisper](https://openai.com/research/whisper) - for text-to-audio
+- [OpenAI whisper](https://openai.com/research/whisper) - for audio-to-text
 - [Facebook M2M10](https://huggingface.co/facebook/m2m100_418M) - for translation
 
 Tools used:
