@@ -13,6 +13,7 @@ setup(
     install_requires=[
         "transformers",
         "openai-whisper",
+        "sentencepiece"
     ],
     packages=["gptsubtitler"],
     classifiers=[
