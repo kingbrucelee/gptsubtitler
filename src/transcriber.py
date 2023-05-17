@@ -10,7 +10,7 @@ class Transcriber(object):
     target_language = None
     language_model_type = None
     device = None
-    AVAILABLE_MODELS = ["tiny", "base", "medium", "large"]
+    AVAILABLE_MODELS = ["tiny", "base", "small", "medium", "large"]
 
     @staticmethod
     def create_model():
