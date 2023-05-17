@@ -1,5 +1,5 @@
 # Subtitler
-Automatically subtitle any English-speaking video to a language of your choice.
+Automatically subtitle any video spoken in any language to a language of your choice.
 
 Models used:
 - OpenAI whisper - for text-to-audio
@@ -24,10 +24,13 @@ pip install -r requirements.txt
 
 # Quick guide
 Example usage for adding subtitles and translating them in Romanian:
+
+You only need to specify the language you want the subtitles to be in, the program will handle the rest of the work.
 ```py
 from src.transcriber import Transcriber
 
-Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="large")
+# I strongly recommend using the "medium" model_type.
+Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="base", device="cuda")
 ```
 
 You can also use the `Translator` class from `translator.py` if you just want to translate some text.
@@ -36,7 +39,7 @@ Example usage for translating from English to Romanian:
 ```py
 from src.translator import Translator
 
-print(Translator.translate("Hi!", target_language="ro", source_language="en"))
+print(Translator.translate("Hi!", target_language="ro", source_language="en", device="cuda"))
 ```
 
 If you have generated a `.srt` file and just want to add subtitles:
@@ -46,13 +49,17 @@ create_video_with_subtitles("video.mp4", "output.srt", "video_subtitled.mp4")
 ```
 
 # Options
+Device (if you have a gpu and have installed [pytorch](https://pytorch.org/get-started/locally/), use "cuda"):
+- cpu - default
+- cuda
+
 Available options for `model_type` (the audio to text model):
 - tiny
-- base
+- base - default
 - small
 - medium
 - large
 
 Available options for `language_model_type` (the language translator model):
-- base
+- base - default
 - large
