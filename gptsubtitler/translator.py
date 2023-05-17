@@ -69,10 +69,8 @@ class Translator(object):
 
         if device == "cuda":
             if not torch.cuda.is_available():
-                print("CUDA is not available. Using CPU.")
                 device = "cpu"
             else:
-                print("CUDA is available. Using GPU.")
                 device = "cuda:0"
 
         # Set model type

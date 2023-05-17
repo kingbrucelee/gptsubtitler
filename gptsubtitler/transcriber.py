@@ -27,7 +27,7 @@ class Transcriber(object):
     def transcribe(
         video_file,
         output_video_file=None,
-        output_file="output.srt",
+        output_subtitle_file="output.srt",
         target_language=None,
         model_type="base",
         language_model_type="base",
@@ -40,7 +40,7 @@ class Transcriber(object):
 
             output_video_file (str, optional): Path to output video file. Defaults to None.
 
-            output_file (str, optional): Path to output SRT file. Defaults to "output.srt".
+            output_subtitle_file (str, optional): Path to output SRT file. Defaults to "output.srt".
 
             target_language (str, optional): Target language for translation. Defaults to None.
 
@@ -105,7 +105,7 @@ class Transcriber(object):
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(srt_content)
 
-        create_video_with_subtitles(video_file, output_file, output_video_file)
+        create_video_with_subtitles(video_file, output_subtitle_file, output_video_file)
 
     @staticmethod
     def generate_srt_file(transcript):
