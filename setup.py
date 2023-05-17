@@ -6,7 +6,7 @@ def readme():
 
 setup(
     name="gptsubtitler",
-    version="0.0.7",
+    version="0.0.8",
     author="extremq",
     author_email="extremqcontact@gmail.com",
     description="Automatically subtitle any video spoken in any language to a language of your choice.",
