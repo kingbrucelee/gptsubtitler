@@ -33,6 +33,23 @@ class Transcriber(object):
         language_model_type="base",
         device="cpu",
     ):
+        """Transcribe video file and generate SRT file.
+        
+        Args:
+            video_file (str): Path to video file.
+
+            output_video_file (str, optional): Path to output video file. Defaults to None.
+
+            output_file (str, optional): Path to output SRT file. Defaults to "output.srt".
+
+            target_language (str, optional): Target language for translation. Defaults to None.
+
+            model_type (str, optional): Model type. Defaults to "base".
+
+            language_model_type (str, optional): Language model type. Defaults to "base".
+
+            device (str, optional): Device to use. Defaults to "cpu".
+        """
         if model_type not in Transcriber.AVAILABLE_MODELS:
             print(
                 f"Invalid 'model_type'. Using base model. Available models: {Transcriber.AVAILABLE_MODELS}"

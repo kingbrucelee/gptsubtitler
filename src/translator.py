@@ -46,6 +46,21 @@ class Translator(object):
         model_type="base",
         device="cpu",
     ):
+        """Translate text.
+        
+        Args:
+            text (str): Text to translate.
+
+            source_language (str, optional): Source language. Defaults to "en".
+
+            target_language (str, optional): Target language. Defaults to "ro".
+
+            model_type (str, optional): Model type. Defaults to "base".
+
+            device (str, optional): Device to use. Defaults to "cpu".
+        Returns:
+            str: Translated text.
+        """
         if model_type not in Translator.AVAILABLE_MODELS:
             print(
                 f"Invalid 'model_type'. Using base model. Available models: {Translator.AVAILABLE_MODELS}"

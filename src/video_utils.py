@@ -20,6 +20,15 @@ def convert_video_to_audio(video_path, output_path):
     print("Video converted to audio.")
 
 def create_video_with_subtitles(video_path, subtitles_path, output_path):
+    """Create video with subtitles.
+    
+    Args:
+        video_path (str): Path to video file.
+
+        subtitles_path (str): Path to subtitles file.
+        
+        output_path (str): Path to output video file.
+    """
     print("Creating video with subtitles.")
 
     try:
