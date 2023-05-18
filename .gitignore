@@ -7,3 +7,5 @@ dist/
 gptsubtitler.egg-info
 build
 models
+test2.py
+temporary_audio.wav

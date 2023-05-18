@@ -25,7 +25,16 @@ class Transcriber(object):
                 threads = threads // 2
 
             try:
-                Transcriber.model = Model(Transcriber.captioning_model_type, n_threads=threads, models_dir=Transcriber.model_dir)
+                # Set model directory if specified
+                if Transcriber.model_dir is not None:
+                    if os.environ.get("HF_HOME") is None:
+                        raise Exception(
+                            "HF_HOME environment variable not set! Please set HF_HOME environment variable! Otherwise, run without model_dir parameter."
+                        )
+                    else:
+                        Transcriber.model = Model(Transcriber.captioning_model_type, n_threads=threads, models_dir=Transcriber.model_dir)
+                else:
+                    Transcriber.model = Model(Transcriber.captioning_model_type, n_threads=threads)
             except Exception as e:
                 print("Couldn't load model.")
                 print(e)
@@ -111,21 +120,26 @@ class Transcriber(object):
             print("Couldn't transcribe audio.")
             print(e)
 
+        # Add .srt extension if not present
+        if not output_subtitle_file.endswith(".srt"):
+            output_subtitle_file += ".srt"
+
         # Try to generate SRT file
-        srt_content = None
+        srt_content = Transcriber.generate_srt_file(transcript, supress_output=True)
+
+        # Checkpoint SRT file
+        with open("checkpoint_" + output_subtitle_file, "w", encoding="utf-8") as f:
+            f.write(srt_content)
+
         try:
             print("Generating SRT file.")
-            srt_content = Transcriber.generate_srt_file(transcript)
+            srt_content = Transcriber.generate_srt_file(transcript, supress_output=False, with_translation=True)
             print("SRT file generated.")
         except Exception as e:
             print("Couldn't generate SRT file.")
             print(e)
 
-        # Add .srt extension if not present
-        if not output_subtitle_file.endswith(".srt"):
-            output_subtitle_file += ".srt"
-
-        # Write SRT file
+        # Write final SRT file
         with open(output_subtitle_file, "w", encoding="utf-8") as f:
             f.write(srt_content)
 
@@ -135,9 +149,10 @@ class Transcriber(object):
         print("Video with subtitles created.")
 
     @staticmethod
-    def generate_srt_file(transcript):
+    def generate_srt_file(transcript, with_translation=False, supress_output=False):
         srt_content = ""
-        print(f"Total lines: {len(transcript)}")
+        if supress_output is False:
+            print(f"Total lines: {len(transcript)}")
         for count, line in enumerate(transcript):
             # Add line number
             srt_content += str(count) + "\n"
@@ -152,7 +167,7 @@ class Transcriber(object):
 
             # Add text
             text = line.text.strip()
-            if Transcriber.target_language is not None and Transcriber.target_language != Transcriber.source_language:
+            if with_translation is True and Transcriber.target_language is not None and Transcriber.target_language != Transcriber.source_language:
                 # Translate text only if user wanted to translate text
                 text = Translator.translate(
                     text,
@@ -162,13 +177,15 @@ class Transcriber(object):
                     model_dir=Transcriber.model_dir,
                 ).strip()
 
-                print(
-                    f"- Line {count} of {len(transcript)}: {line.text}\n --> {text}"
-                )
+                if supress_output is False:
+                    print(
+                        f"- Line {count + 1} of {len(transcript)}: {line.text}\n --> {text}"
+                    )
             else:
-                print(
-                    f"- Line {count} of {len(transcript)}: {line.text}"
-                )
+                if supress_output is False:
+                    print(
+                        f"- Line {count + 1} of {len(transcript)}: {line.text}"
+                    )
             srt_content += text + "\n"
 
             srt_content += "\n"
