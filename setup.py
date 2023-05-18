@@ -6,21 +6,24 @@ def readme():
 
 setup(
     name="gptsubtitler",
-    version="0.0.8",
+    version="0.0.9",
     author="extremq",
     author_email="extremqcontact@gmail.com",
     description="Automatically subtitle any video spoken in any language to a language of your choice.",
     install_requires=[
-        "transformers",
-        "openai-whisper",
-        "sentencepiece"
+        "transformers>=4.29.1",
+        "pywhispercpp>=1.0.8"
     ],
     packages=["gptsubtitler"],
     classifiers=[
-        "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    entry_points = {
+        "console_scripts": [
+            "gptsubtitler = gptsubtitler.cli:main"
+        ]
+    },
     long_description=readme(),
     long_description_content_type = "text/markdown"
 )

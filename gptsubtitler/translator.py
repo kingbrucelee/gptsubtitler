@@ -1,15 +1,23 @@
 from transformers import M2M100ForConditionalGeneration, M2M100Tokenizer
-import torch
+import os
 
 
 class Translator(object):
     model = None
     tokenizer = None
     model_type = None
+    model_dir = None
     AVAILABLE_MODELS = ["base", "large"]
 
     @staticmethod
     def create_model_and_tokenizer():
+        # Set model directory
+        if Translator.model_dir is not None:
+            if os.environ.get("HF_HOME") is None:
+                raise Exception(
+                    "HF_HOME environment variable not set! Please set HF_HOME environment variable! Otherwise, run without model_dir parameter."
+                )
+
         if Translator.model is None:
             try:
                 if Translator.model_type == "base":
@@ -44,10 +52,10 @@ class Translator(object):
         source_language="en",
         target_language="ro",
         model_type="base",
-        device="cpu",
+        model_dir=None,
     ):
         """Translate text.
-        
+
         Args:
             text (str): Text to translate.
 
@@ -56,8 +64,6 @@ class Translator(object):
             target_language (str, optional): Target language. Defaults to "ro".
 
             model_type (str, optional): Model type. Defaults to "base".
-
-            device (str, optional): Device to use. Defaults to "cpu".
         Returns:
             str: Translated text.
         """
@@ -67,11 +73,8 @@ class Translator(object):
             )
             model_type = "base"
 
-        if device == "cuda":
-            if not torch.cuda.is_available():
-                device = "cpu"
-            else:
-                device = "cuda:0"
+        # Set model directory
+        Translator.model_dir = model_dir
 
         # Set model type
         Translator.model_type = model_type
@@ -83,15 +86,13 @@ class Translator(object):
 
         # Try to encode text
         try:
-            encoded_text = Translator.tokenizer(text, return_tensors="pt").to(device)
+            encoded_text = Translator.tokenizer(text, return_tensors="pt")
         except Exception as e:
             print("Couldn't encode text.")
             print(e)
 
         # Try to generate tokens
         try:
-            # Move to device first
-            Translator.model = Translator.model.to(device)
             generated_tokens = Translator.model.generate(
                 **encoded_text,
                 forced_bos_token_id=Translator.tokenizer.get_lang_id(target_language),

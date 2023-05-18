@@ -2,7 +2,7 @@
 Automatically subtitle any video spoken in any language to a language of your choice using AI.
 
 Models used:
-- [OpenAI whisper](https://openai.com/research/whisper) - for audio-to-text
+- [OpenAI whisper C++ port](https://github.com/ggerganov/whisper.cpp) - for audio-to-text
 - [Facebook M2M10](https://huggingface.co/facebook/m2m100_418M) - for translation
 
 Tools used:
@@ -40,15 +40,17 @@ choco install ffmpeg
 # Quick guide
 Example usage for adding subtitles and translating them in Romanian:
 
-You only need to specify the language you want the subtitles to be in, the program will handle the rest of the work.
+Command line:
+```bash
+gptsubtitler soldier.mp4 --source_language en --target_language ro --captioning_model_type medium --language_model_type base
+```
+
+Or in Python
 ```py
 from gptsubtitler import Transcriber
 
 # I strongly recommend using the "medium" model_type.
-Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="base")
-
-# If you want to use the gpu, add device="cuda"
-# Transcriber.transcribe("soldier.mp4", target_language="ro", model_type="medium", language_model_type="base", device="cuda") 
+Transcriber.transcribe("soldier.mp4", source_language="en", target_language="ro", captioning_model_type="medium", language_model_type="base")
 ```
 
 You can also use the `Translator` class from `translator.py` if you just want to translate some text.
@@ -67,11 +69,26 @@ create_video_with_subtitles("video.mp4", "output.srt", "video_subtitled.mp4")
 ```
 
 # Options
-Device (if you have a gpu and have installed [pytorch](https://pytorch.org/get-started/locally/), use "cuda"):
-- cpu - default
-- cuda
+```
+Args:
+    video_file (str): Path to video file.
 
-Available options for `model_type` (the audio to text model):
+    output_video_file (str, optional): Path to output video file. Defaults to video_file_subtitled.
+
+    output_subtitle_file (str, optional): Path to output SRT file. Defaults to "output.srt".
+
+    source_language (str, optional): Source language for translation. Defaults to en.
+
+    target_language (str, optional): Target language for translation. Defaults to None.
+
+    captioning_model_type (str, optional): Model type. Defaults to "base".
+
+    language_model_type (str, optional): Language model type. Defaults to "base".
+
+    model_dir (str, optional): Path to model directory. Defaults to None.
+```
+
+Available options for `captioning_model_type` (the audio to text model):
 - tiny
 - base - default
 - small
