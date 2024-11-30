@@ -111,8 +111,10 @@ class Transcriber(object):
 
             print("Captioning audio.")
             transcript = Transcriber.model.transcribe(
-                "temporary_audio.wav", language=Transcriber.source_language, speed_up=True, print_progress=False
-            )
+            "temporary_audio.wav", 
+            language=Transcriber.source_language, 
+            print_progress=False
+        )
             print("Finished captioning.")
 
             os.remove("temporary_audio.wav")
